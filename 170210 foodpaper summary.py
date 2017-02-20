@@ -9,7 +9,7 @@ fs_api_key = ''
 d = ''
 soup = ''
 output = ''
-locations = {}
+locations = {'210W': 0, 'CTO': 0, 'Kent': 0, 'Spring': 0}
 
 def get_api_key():
 	
@@ -98,7 +98,7 @@ def round_up_results():
 	
 	locations = collections.OrderedDict(sorted(locations.items()))
 	
-	add_to_output('')
+	add_to_output('## TOTALS\n')
 	for store, total in locations.items():
 		add_to_output('{0:7} ${1:8,.2f}'.format(store, total))
 
