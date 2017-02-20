@@ -6,20 +6,23 @@ import collections
 # Soup http://omz-software.com/pythonista/docs/ios/beautifulsoup_guide.html
 
 fs_api_key = ''
+form_id = ''
 d = ''
 soup = ''
 output = ''
 locations = {'210W': 0, 'CTO': 0, 'Kent': 0, 'Spring': 0}
 
-def get_api_key():
+def get_form_info():
 	
 	import os
-	global fs_api_key
+	global fs_api_key, form_id
 	loc_here = os.path.join(os.getcwd(), os.path.dirname(__file__))
 	loc_here = os.path.realpath(loc_here)
 	loc_file = os.path.join(loc_here + '/170210 FS', '170211 fs_api_key.txt')
 	file = open(loc_file, 'r')
-	fs_api_key = file.read().splitlines()[0]
+	file_contents = file.readlines()
+	fs_api_key = file_contents[0].rstrip()
+	form_id = file_contents[1].rstrip()
 	file.close()
 
 def decide_d():
@@ -47,7 +50,8 @@ def get_soup():
 	d = urllib.parse.urlencode({'fs_min_date': d})
 	api_key = urllib.parse.urlencode({'fs_api_key': fs_api_key})
 	
-	url = 'https://fs19.formsite.com/api/users/kigokitchen/forms/form95/results?'
+	url = 'https://fs19.formsite.com/api/users/kigokitchen/forms/'
+	url = url + form_id + '/results?'
 	url = url + api_key + '&'
 	url = url + d + '+14%3A00%3A00&fs_limit=50&fs_view?Totals'
 	
@@ -106,10 +110,9 @@ def round_up_results():
 		add_to_output('{0:7} ${1:8,.2f}'.format(store, total))
 
 console.clear()
-get_api_key()
+get_form_info()
 decide_d()
 get_soup()
-# print(url+'\n')
 # print(soup.prettify())
 round_up_results()
 
