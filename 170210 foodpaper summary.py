@@ -51,8 +51,6 @@ def get_soup():
 	url = url + api_key + '&'
 	url = url + d + '+14%3A00%3A00&fs_limit=50&fs_view?Totals'
 	
-	# print(url+'\n')
-	
 	soup = BeautifulSoup(requests.get(url).text, "html5lib")
 
 def add_to_output(input=''):
@@ -63,8 +61,13 @@ def add_to_output(input=''):
 def round_up_results():
 	
 	global locations
+	
 	for status in soup.find_all('fs_response'):
-		add_to_output(status.get('status') + '\n')
+		req_status = status.get('status')
+		req_status = req_status + ' ' + status.get('timestamp')
+		add_to_output(req_status + '\n')
+	
+	add_to_output('## Results\n')
 	
 	for ref in soup.find_all('result'):
 		add_to_output('Ref#'+(ref.get('id')))
@@ -106,6 +109,7 @@ console.clear()
 get_api_key()
 decide_d()
 get_soup()
+# print(url+'\n')
 # print(soup.prettify())
 round_up_results()
 
