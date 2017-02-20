@@ -12,6 +12,19 @@ soup = ''
 output = ''
 locations = {'210W': 0, 'CTO': 0, 'Kent': 0, 'Spring': 0}
 
+form_dic = {'sup':
+	{'loc': '71',
+	'type': '292',
+	'total': '249',
+	'speed': '73',
+	'comment': '74'},
+	'fp':
+	{'loc': '247',
+	'type': '229',
+	'total': '226',
+	'speed': '73',
+	'comment': '74'}}
+
 def get_form_info():
 	
 	import os
