@@ -29,9 +29,10 @@ def add_to_output(input=''):
 	output = output + input + '\n'
 
 def meta_extract(s, meta_id):
+	s = str(s)
 	find = '<meta id="' + meta_id + '"/>'
 	offset = len(s) - s.find(find) - len(find)
-	return s[-offset:].splitlines()[1].strip()
+	return s[-offset:].splitlines()[0].strip()
 
 def get_form_info():
 	
@@ -91,6 +92,7 @@ def round_up_results():
 	
 	for ref in soup.find_all('result'):
 		add_to_output('Ref#'+(ref.get('id')))
+		add_to_output(meta_extract(str(ref),'date_finish'))
 		valueprefix = ''
 		negpos = 1
 		for loc in ref.find_all('item', id='247'):
