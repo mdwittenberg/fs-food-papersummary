@@ -12,18 +12,26 @@ soup = ''
 output = ''
 locations = {'210W': 0, 'CTO': 0, 'Kent': 0, 'Spring': 0}
 
-form_dic = {'sup':
-	{'loc': '71',
+form_dic = {'sup': {'loc': '71',
 	'type': '292',
 	'total': '249',
 	'speed': '73',
 	'comment': '74'},
-	'fp':
-	{'loc': '247',
+	'fp': {'loc': '247',
 	'type': '229',
 	'total': '226',
 	'speed': '73',
 	'comment': '74'}}
+
+def add_to_output(input=''):
+	
+	global output
+	output = output + input + '\n'
+
+def meta_extract(s, meta_id):
+	find = '<meta id="' + meta_id + '"/>'
+	offset = len(s) - s.find(find) - len(find)
+	return s[-offset:].splitlines()[1].strip()
 
 def get_form_info():
 	
@@ -69,11 +77,6 @@ def get_soup():
 	url = url + d + '+14%3A00%3A00&fs_limit=50&fs_view?Totals'
 	
 	soup = BeautifulSoup(requests.get(url).text, "html5lib")
-
-def add_to_output(input=''):
-	
-	global output
-	output = output + input + '\n'
 
 def round_up_results():
 	
@@ -126,7 +129,7 @@ console.clear()
 get_form_info()
 decide_d()
 get_soup()
-# print(soup.prettify())
+#print(soup.prettify())
 round_up_results()
 
 if 1 == 1:
