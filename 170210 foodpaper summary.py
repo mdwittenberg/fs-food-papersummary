@@ -8,6 +8,7 @@ from datetime import timedelta, date, datetime
 
 fs_api_key = ''
 form_id = ''
+d_consider = datetime.now()
 d = ''
 soup = ''
 output = ''
@@ -51,6 +52,7 @@ def get_form_info():
 def decide_d():
 	
 	global d
+	global d_consider
 	if date.weekday(datetime.now()) < 4 and datetime.now().hour > 14:
 		d_consider = datetime.now() + timedelta(days=1)
 	else:
@@ -61,21 +63,25 @@ def decide_d():
 	else:
 		days_back = 1
 		
-	d = d_consider - timedelta(days=days_back)
+	d_consider = d_consider - timedelta(days=days_back)
+	
+	d_consider = d_consider.replace(hour=14, minute=0, second=0, microsecond=0)
 
 def get_soup():
 	
 	from bs4 import BeautifulSoup
 	
 	global d, soup
-	d = d.strftime('%Y-%m-%d')
+	d = d_consider.strftime('%Y-%m-%d')
 	d = urllib.parse.urlencode({'fs_min_date': d})
 	api_key = urllib.parse.urlencode({'fs_api_key': fs_api_key})
 	
 	url = 'https://fs19.formsite.com/api/users/kigokitchen/forms/'
-	url = url + form_id + '/results?'
-	url = url + api_key + '&'
-	url = url + d + '+14%3A00%3A00&fs_limit=50&fs_view?Totals'
+	url += form_id + '/results?'
+	url += api_key + '&'
+	url += d 
+	url += '&fs_limit=100&'
+	url += 'fs_view?Totals'
 	
 	soup = BeautifulSoup(requests.get(url).text, "html5lib")
 
@@ -93,6 +99,8 @@ def round_up_results():
 	for ref in soup.find_all('result'):
 		doo = meta_extract(str(ref),'date_finish')
 		doo = datetime.strptime(doo, '%Y-%m-%d %H:%M:%S')
+		if doo < d_consider:
+			continue
 		add_to_output('Ref#'+(ref.get('id')))
 		add_to_output(doo.strftime('%y%m%d %I:%M %p'))
 		valueprefix = ''
