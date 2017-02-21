@@ -2,6 +2,7 @@ import urllib
 import console
 import requests
 import collections
+from datetime import timedelta, date, datetime
 
 # Soup http://omz-software.com/pythonista/docs/ios/beautifulsoup_guide.html
 
@@ -49,7 +50,6 @@ def get_form_info():
 
 def decide_d():
 	
-	from datetime import timedelta, date, datetime
 	global d
 	if date.weekday(datetime.now()) < 4 and datetime.now().hour > 14:
 		d_consider = datetime.now() + timedelta(days=1)
@@ -91,8 +91,10 @@ def round_up_results():
 	add_to_output('## Results\n')
 	
 	for ref in soup.find_all('result'):
+		doo = meta_extract(str(ref),'date_finish')
+		doo = datetime.strptime(doo, '%Y-%m-%d %H:%M:%S')
 		add_to_output('Ref#'+(ref.get('id')))
-		add_to_output(meta_extract(str(ref),'date_finish'))
+		add_to_output(doo.strftime('%y%m%d %I:%M %p'))
 		valueprefix = ''
 		negpos = 1
 		for loc in ref.find_all('item', id='247'):
