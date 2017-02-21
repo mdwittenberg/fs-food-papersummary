@@ -110,8 +110,8 @@ def round_up_results():
 				add_to_output(string)
 				location = string
 		for type in ref.find_all('item', id='229'):
-			t = type.get_text()
-			if t == '\nCredit\n':
+			t = type.get_text().rstrip
+			if t == 'Credit':
 				valueprefix = 'CREDIT FOR ' + valueprefix
 				negpos = -1
 		for total in ref.find_all('item', id='226'):
