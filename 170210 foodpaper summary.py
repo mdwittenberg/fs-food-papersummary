@@ -2,6 +2,7 @@ import urllib
 import console
 import requests
 import collections
+import clipboard
 from datetime import timedelta, date, datetime
 
 # Soup http://omz-software.com/pythonista/docs/ios/beautifulsoup_guide.html
@@ -137,17 +138,16 @@ def round_up_results():
 	for store, total in locations.items():
 		add_to_output('{0:7} ${1:8,.2f}'.format(store, total))
 
-console.clear()
 get_form_info()
 decide_d()
 get_soup()
 #print(soup.prettify())
 round_up_results()
 
-if 1 == 1:
+if clipboard.get() != 'iamfromworkflow':
+	console.clear()
 	print(output)
 else:
-	import clipboard
 	import webbrowser
 	clipboard.set(output)
 	webbrowser.open('workflow://')
