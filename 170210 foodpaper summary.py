@@ -61,7 +61,7 @@ def decide_d():
 	
 	if date.weekday(d_consider) == 0:
 		days_back = 3
-	if date.weekday(d_consider) == 6:
+	elif date.weekday(d_consider) == 6:
 		days_back = 2
 	else:
 		days_back = 1
@@ -113,7 +113,14 @@ def round_up_results():
 	results.reverse()
 	
 	for ref in results:
-		add_to_output('Ref#'+(ref.get('id')))
+		for type in ref.find_all('item', id='229'):
+			t = type.get_text()
+			if t == '\nCredit\n':
+				for org_ref in ref.find_all('item', id='231'):
+					for string in org_ref.stripped_strings:
+						add_to_output('Ref#' + string)
+			else:
+				add_to_output('Ref#'+(ref.get('id')))
 		doo = meta_extract(str(ref),'date_finish')
 		doo = datetime.strptime(doo, '%Y-%m-%d %H:%M:%S')
 		add_to_output(doo.strftime('%y%m%d %I:%M %p'))
@@ -154,11 +161,11 @@ def round_up_results():
 get_form_info()
 decide_d()
 get_soup()
-#print(soup.prettify())
+print(soup.prettify())
 round_up_results()
 
 if clipboard.get() != 'iamfromworkflow':
-	console.clear()
+	#console.clear()
 	print(output)
 else:
 	import webbrowser
