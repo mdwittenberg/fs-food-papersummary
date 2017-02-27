@@ -59,6 +59,8 @@ def decide_d():
 	else:
 		d_consider = datetime.now()
 	
+	if date.weekday(d_consider) == 0:
+		days_back = 3
 	if date.weekday(d_consider) == 6:
 		days_back = 2
 	else:
