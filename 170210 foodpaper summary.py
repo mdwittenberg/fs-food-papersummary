@@ -89,13 +89,15 @@ def get_soup():
 def round_up_results():
 	
 	global locations
+	global d_consider
 	
 	for status in soup.find_all('fs_response'):
 		req_status = status.get('status')
 		req_status = req_status + ' ' + status.get('timestamp')
 		add_to_output(req_status + '\n')
 	
-	add_to_output('## Results\n')
+	d_simple = d_consider.strftime('%y%m%d %a %I:%M %p')
+	add_to_output('## Results from ' + d_simple + '\n')
 	
 	results = []
 	
