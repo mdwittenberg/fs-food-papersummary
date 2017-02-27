@@ -2,6 +2,7 @@ import urllib
 import console
 import requests
 import collections
+import clipboard
 from datetime import timedelta, date, datetime
 
 # Soup http://omz-software.com/pythonista/docs/ios/beautifulsoup_guide.html
@@ -96,12 +97,21 @@ def round_up_results():
 	
 	add_to_output('## Results\n')
 	
+	results = []
+	
 	for ref in soup.find_all('result'):
 		doo = meta_extract(str(ref),'date_finish')
 		doo = datetime.strptime(doo, '%Y-%m-%d %H:%M:%S')
 		if doo < d_consider:
 			continue
+		results.append(ref)
+	
+	results.reverse()
+	
+	for ref in results:
 		add_to_output('Ref#'+(ref.get('id')))
+		doo = meta_extract(str(ref),'date_finish')
+		doo = datetime.strptime(doo, '%Y-%m-%d %H:%M:%S')
 		add_to_output(doo.strftime('%y%m%d %I:%M %p'))
 		valueprefix = ''
 		negpos = 1
@@ -118,7 +128,7 @@ def round_up_results():
 			for string in total.stripped_strings:
 				add_to_output(valueprefix + '${:,.2f}'.format(float(string)))
 				if location in locations:
-					locations[location] = locations[location] + float(string)*negpos
+					locations[location] += float(string)*negpos
 				else:
 					locations[location] = float(string)*negpos
 		for speed in ref.find_all('item', id='73'):
@@ -137,17 +147,16 @@ def round_up_results():
 	for store, total in locations.items():
 		add_to_output('{0:7} ${1:8,.2f}'.format(store, total))
 
-console.clear()
 get_form_info()
 decide_d()
 get_soup()
 #print(soup.prettify())
 round_up_results()
 
-if 1 == 1:
+if clipboard.get() != 'iamfromworkflow':
+	console.clear()
 	print(output)
 else:
-	import clipboard
 	import webbrowser
 	clipboard.set(output)
 	webbrowser.open('workflow://')
