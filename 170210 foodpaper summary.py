@@ -16,11 +16,13 @@ output = ''
 locations = {'210W': 0, 'CTO': 0, 'Kent': 0, 'Spring': 0}
 
 form_dic = {'sup': {'loc': '71',
+	'org_ref': '',
 	'type': '292',
 	'total': '249',
 	'speed': '73',
 	'comment': '74'},
 	'fp': {'loc': '247',
+	'org_ref': '231',
 	'type': '229',
 	'total': '226',
 	'speed': '73',
@@ -161,11 +163,11 @@ def round_up_results():
 get_form_info()
 decide_d()
 get_soup()
-print(soup.prettify())
+#print(soup.prettify())
 round_up_results()
 
 if clipboard.get() != 'iamfromworkflow':
-	#console.clear()
+	console.clear()
 	print(output)
 else:
 	import webbrowser
