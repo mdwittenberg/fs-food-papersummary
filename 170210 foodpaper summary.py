@@ -56,7 +56,7 @@ def decide_d():
 	
 	global d
 	global d_consider
-	if date.weekday(datetime.now()) < 4 and datetime.now().hour > 14:
+	if datetime.now().hour > 13:
 		d_consider = datetime.now() + timedelta(days=1)
 	else:
 		d_consider = datetime.now()
