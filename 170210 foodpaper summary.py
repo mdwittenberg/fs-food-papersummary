@@ -1,8 +1,6 @@
 import urllib
-import console
 import requests
 import collections
-import clipboard
 from datetime import timedelta, date, datetime
 
 # Soup http://omz-software.com/pythonista/docs/ios/beautifulsoup_guide.html
@@ -166,10 +164,16 @@ get_soup()
 #print(soup.prettify())
 round_up_results()
 
-if clipboard.get() != 'iamfromworkflow':
-	console.clear()
+try:
+	import clipboard
+	if clipboard.get() != 'iamfromworkflow':
+		import console
+		console.clear()
+		print(output)
+	else:
+		import webbrowser
+		clipboard.set(output)
+		webbrowser.open('workflow://')
+except ModuleNotFoundError as err:
 	print(output)
-else:
-	import webbrowser
-	clipboard.set(output)
-	webbrowser.open('workflow://')
+
