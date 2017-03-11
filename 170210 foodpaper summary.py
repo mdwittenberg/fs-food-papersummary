@@ -161,7 +161,6 @@ def round_up_results():
 get_form_info()
 decide_d()
 get_soup()
-#print(soup.prettify())
 round_up_results()
 
 try:
@@ -176,4 +175,3 @@ try:
 		webbrowser.open('workflow://')
 except ModuleNotFoundError as err:
 	print(output)
-
