@@ -174,4 +174,5 @@ try:
 		clipboard.set(output)
 		webbrowser.open('workflow://')
 except ModuleNotFoundError as err:
+	output = '\n' + output
 	print(output)
