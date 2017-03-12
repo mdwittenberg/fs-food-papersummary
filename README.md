@@ -12,7 +12,7 @@ Requires
 
 - [beautifulsoup4](https://pypi.python.org/pypi/beautifulsoup4/)
 - [requests](https://pypi.python.org/pypi/requests/)
-- [html5lb](https://pypi.python.org/pypi/html5lib/)
+- [html5lib](https://pypi.python.org/pypi/html5lib/)
 
 Tested with
 
