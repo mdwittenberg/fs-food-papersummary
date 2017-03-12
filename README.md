@@ -25,4 +25,4 @@ On Mac: [Keyboard Meastro](https://www.keyboardmaestro.com/)
 - Execute Shell Script
 - Display results in a window
 
-On iOS: Either run inside of Pythonista or use [Workflow](https://workflow.is) (eg [sample workflow](https://workflow.is/workflows/cb3ed15defac409ba370ab584334f14b)
+On iOS: Either run inside of Pythonista or use [Workflow](https://workflow.is) (eg [sample workflow](https://workflow.is/workflows/cb3ed15defac409ba370ab584334f14b))
