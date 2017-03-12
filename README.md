@@ -10,8 +10,9 @@ Create a collection of scripts to quickly pull data from Formsite and perform ba
 
 Requires
 
-- [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/)
-- [Requests](http://docs.python-requests.org/)
+- [beautifulsoup4](https://pypi.python.org/pypi/beautifulsoup4/)
+- [requests](https://pypi.python.org/pypi/requests/)
+- [html5lb](https://pypi.python.org/pypi/html5lib/)
 
 Tested with
 
@@ -29,5 +30,5 @@ On Mac:
 
 On iOS: 
 
-1. Pythonista, right in the console
+1. Pythonista
 2. [Workflow](https://workflow.is) (eg [sample workflow](https://workflow.is/workflows/cb3ed15defac409ba370ab584334f14b))
