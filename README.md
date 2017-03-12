@@ -20,9 +20,14 @@ Tested with
 
 ## Recommendations
 
-On Mac: [Keyboard Meastro](https://www.keyboardmaestro.com/)
+On Mac:
 
-- Execute Shell Script
-- Display results in a window
+1. [Keyboard Meastro](https://www.keyboardmaestro.com/)
+    - Execute Shell Script
+    - Display results in a window
+2. AppleScript
 
-On iOS: Either run inside of Pythonista or use [Workflow](https://workflow.is) (eg [sample workflow](https://workflow.is/workflows/cb3ed15defac409ba370ab584334f14b))
+On iOS: 
+
+1. Pythonista, right in the console
+2. [Workflow](https://workflow.is) (eg [sample workflow](https://workflow.is/workflows/cb3ed15defac409ba370ab584334f14b))
