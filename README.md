@@ -22,7 +22,7 @@ Tested with
 
 On Mac:
 
-1. [Keyboard Meastro](https://www.keyboardmaestro.com/)
+1. [Keyboard Maestro](https://www.keyboardmaestro.com/)
     - Execute Shell Script
     - Display results in a window
 2. AppleScript
