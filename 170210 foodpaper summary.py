@@ -158,21 +158,24 @@ def round_up_results():
 	for store, total in locations.items():
 		add_to_output('{0:7} ${1:8,.2f}'.format(store, total))
 
+def output_output():
+	global output
+	try:
+		import clipboard
+		if clipboard.get() != 'iamfromworkflow':
+			import console
+			console.clear()
+			print(output)
+		else:
+			import webbrowser
+			clipboard.set(output)
+			webbrowser.open('workflow://')
+	except ModuleNotFoundError as err:
+		output = '\n' + output
+		print(output)
+
 get_form_info()
 decide_d()
 get_soup()
 round_up_results()
-
-try:
-	import clipboard
-	if clipboard.get() != 'iamfromworkflow':
-		import console
-		console.clear()
-		print(output)
-	else:
-		import webbrowser
-		clipboard.set(output)
-		webbrowser.open('workflow://')
-except ModuleNotFoundError as err:
-	output = '\n' + output
-	print(output)
+output_output()
