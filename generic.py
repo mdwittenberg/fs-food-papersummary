@@ -88,18 +88,21 @@ def status(soup):
 		req_status = req_status + ' ' + status.get('timestamp')
 		add_to_output(req_status + '\n')
 
-def output_output():
+def output_output(as_text=False):
 	global output
-	try:
-		import clipboard
-		if clipboard.get() != 'iamfromworkflow':
-			import console
-			console.clear()
+	if as_text:
+		return output
+	else:
+		try:
+			import clipboard
+			if clipboard.get() != 'iamfromworkflow':
+				import console
+				console.clear()
+				print(output)
+			else:
+				import webbrowser
+				clipboard.set(output)
+				webbrowser.open('workflow://')
+		except ModuleNotFoundError as err:
+			output = '\n' + output
 			print(output)
-		else:
-			import webbrowser
-			clipboard.set(output)
-			webbrowser.open('workflow://')
-	except ModuleNotFoundError as err:
-		output = '\n' + output
-		print(output)
