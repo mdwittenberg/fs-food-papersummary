@@ -11,7 +11,7 @@ d_consider = datetime.now()
 d = ''
 soup = ''
 output = ''
-locations = {'210W': 0, 'CTO': 0, 'PSQ': 0, 'Spring': 0}
+locations = {'210W': 0, 'CTO': 0, 'PSQ': 0, 'Spring': 0, 'Met': 0}
 
 form_dic = {'sup': {'loc': '71',
 	'org_ref': '',
@@ -54,7 +54,7 @@ def decide_d():
 	
 	global d
 	global d_consider
-	if datetime.now().hour > 12:
+	if datetime.now().hour > 11:
 		d_consider = datetime.now() + timedelta(days=1)
 	else:
 		d_consider = datetime.now()
@@ -68,7 +68,7 @@ def decide_d():
 		
 	d_consider = d_consider - timedelta(days=days_back)
 	
-	d_consider = d_consider.replace(hour=13, minute=0, second=0, microsecond=0)
+	d_consider = d_consider.replace(hour=11, minute=0, second=0, microsecond=0)
 
 def get_soup():
 	
